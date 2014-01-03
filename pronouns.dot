@@ -12,12 +12,15 @@ digraph verbs {
   on [label="{On}|{(e.g.) one}"];
 
   # Direct
-  d_me [label="{me}|{me}"];
-  d_te [label="{te}|{you}"];
-  d_le [label="{le/la}|{him/her}"];
-  d_nous [label="{nous}|{us}"];
-  d_vous [label="{vous}|{you lot}"];
-  d_les [label="{les}|{them}"];
+  subgraph cluster_d {
+    label="Direct object";
+    d_me [label="{me}|{me}"];
+    d_te [label="{te}|{you}"];
+    d_le [label="{le/la}|{him/her}"];
+    d_nous [label="{nous}|{us}"];
+    d_vous [label="{vous}|{you lot}"];
+    d_les [label="{les}|{them}"];
+  }
   to [label="{}|{to}"];
    on -> d_me
    d_me -> to
@@ -33,12 +36,15 @@ digraph verbs {
    d_les -> to
 
   # Indirect
-  i_me [label="{me}|{me}"];
-  i_te [label="{te}|{you}"];
-  i_lui [label="{lui}|{him/her}"];
-  i_nous [label="{nous}|{us}"];
-  i_vous [label="{vous}|{you lot}"];
-  i_leur [label="{leur}|{them}"];
+  subgraph cluster_i {
+    label="Indirect object";
+    i_me [label="{me}|{me}"];
+    i_te [label="{te}|{you}"];
+    i_lui [label="{lui}|{him/her}"];
+    i_nous [label="{nous}|{us}"];
+    i_vous [label="{vous}|{you lot}"];
+    i_leur [label="{leur}|{them}"];
+  }
   verb [label="verb"];
    to -> i_me
    i_me -> verb
@@ -55,23 +61,27 @@ digraph verbs {
 
   # Reflexive
   je [label="{Je}|{I}"];
-  r_me [label="{me}|{myself}"];
-   je -> r_me
   tu [label="{Tu}|{you}"];
-  r_te [label="{te}|{yourself}"];
-   tu -> r_te
   il [label="{Il/Elle}|{he/she}"];
-  r_se [label="{se}|{himself/herself}"];
-   il -> r_se
   nous [label="{Nous}|{we}"];
-  r_nous [label="{nous}|{ourselves}"];
-   nous -> r_nous
   vous [label="{Vous}|{you}"];
-  r_vous [label="{vous}|{yourselves}"];
-   vous -> r_vous
   ils [label="{Ils/Elles}|{they}"];
-  r_pse [label="{se}|{themselves}"];
+  subgraph cluster_r {
+    label="Reflexive object";
+    r_me [label="{me}|{myself}"];
+    r_te [label="{te}|{yourself}"];
+    r_se [label="{se}|{himself/herself}"];
+    r_nous [label="{nous}|{ourselves}"];
+    r_vous [label="{vous}|{yourselves}"];
+    r_pse [label="{se}|{themselves}"];
+  }
+   je -> r_me
+   tu -> r_te
+   il -> r_se
+   nous -> r_nous
+   vous -> r_vous
    ils -> r_pse
+
    r_me -> verb
    r_te -> verb
    r_se -> verb
@@ -83,12 +93,15 @@ digraph verbs {
    verb -> a
 
   # Disjunctive
+  subgraph cluster_dj {
+    label="Disjunctive object";
   dj_moi [label="{moi}|{me}"];
   dj_toi [label="{toi}|{you}"];
   dj_lui [label="{lui/elle}|{him/her}"];
   dj_nous [label="{nous}|{us}"];
   dj_vous [label="{vous}|{you lot}"];
   dj_eux [label="{eux/elles}|{them}"];
+}
    a -> dj_moi
    a -> dj_toi
    a -> dj_lui
@@ -97,8 +110,11 @@ digraph verbs {
    a -> dj_eux
 
   # Demonstrative adjectives
-  da_ce [label="{ce/cet/cette}|{this}"];
-  da_ces [label="{ces}|{these}"];
+  subgraph cluster_da {
+    label="Demonstrative adjective";
+    da_ce [label="{ce/cet/cette}|{this}"];
+    da_ces [label="{ces}|{these}"];
+  }
   noun [label="noun"];
    da_ce -> noun
    da_ces -> noun
@@ -110,8 +126,11 @@ digraph verbs {
    noun -> là
 
   # Demonstrative pronouns
-  dp_celui [label="{celui/celle}|{this one}"];
-  dp_ceux [label="{ceux/celles}|{these ones}"];
+  subgraph cluster_dp {
+    label="Demonstrative pronoun";
+    dp_celui [label="{celui/celle}|{this one}"];
+    dp_ceux [label="{ceux/celles}|{these ones}"];
+  }
    dp_celui -> ci
    dp_celui -> là
    dp_ceux -> ci

@@ -1,0 +1,121 @@
+#
+# French pronoun graph
+# Based on http://www.frenchlanguageguide.com/grammar/pronouns.asp
+#
+# dot is the only one that makes sense for this one
+#
+
+digraph verbs {
+  node [shape=record];
+  rankdir=LR;
+
+  on [label="{On}|{(e.g.) one}"];
+
+  # Direct
+  d_me [label="{me}|{me}"];
+  d_te [label="{te}|{you}"];
+  d_le [label="{le/la}|{him/her}"];
+  d_nous [label="{nous}|{us}"];
+  d_vous [label="{vous}|{you lot}"];
+  d_les [label="{les}|{them}"];
+  to [label="{}|{to}"];
+   on -> d_me
+   d_me -> to
+   on -> d_te
+   d_te -> to
+   on -> d_le
+   d_le -> to
+   on -> d_nous
+   d_nous -> to
+   on -> d_vous
+   d_vous -> to
+   on -> d_les
+   d_les -> to
+
+  # Indirect
+  i_me [label="{me}|{me}"];
+  i_te [label="{te}|{you}"];
+  i_lui [label="{lui}|{him/her}"];
+  i_nous [label="{nous}|{us}"];
+  i_vous [label="{vous}|{you lot}"];
+  i_leur [label="{leur}|{them}"];
+  verb [label="verb"];
+   to -> i_me
+   i_me -> verb
+   to -> i_te
+   i_te -> verb
+   to -> i_lui
+   i_lui -> verb
+   to -> i_nous
+   i_nous -> verb
+   to -> i_vous
+   i_vous -> verb
+   to -> i_leur
+   i_leur -> verb
+
+  # Reflexive
+  je [label="{Je}|{I}"];
+  r_me [label="{me}|{myself}"];
+   je -> r_me
+  tu [label="{Tu}|{you}"];
+  r_te [label="{te}|{yourself}"];
+   tu -> r_te
+  il [label="{Il/Elle}|{he/she}"];
+  r_se [label="{se}|{himself/herself}"];
+   il -> r_se
+  nous [label="{Nous}|{we}"];
+  r_nous [label="{nous}|{ourselves}"];
+   nous -> r_nous
+  vous [label="{Vous}|{you}"];
+  r_vous [label="{vous}|{yourselves}"];
+   vous -> r_vous
+  ils [label="{Ils/Elles}|{they}"];
+  r_pse [label="{se}|{themselves}"];
+   ils -> r_pse
+   r_me -> verb
+   r_te -> verb
+   r_se -> verb
+   r_nous -> verb
+   r_vous -> verb
+   r_pse -> verb   
+
+  a [label="{à}|{(e.g.) belonging to}"]
+   verb -> a
+
+  # Disjunctive
+  dj_moi [label="{moi}|{me}"];
+  dj_toi [label="{toi}|{you}"];
+  dj_lui [label="{lui/elle}|{him/her}"];
+  dj_nous [label="{nous}|{us}"];
+  dj_vous [label="{vous}|{you lot}"];
+  dj_eux [label="{eux/elles}|{them}"];
+   a -> dj_moi
+   a -> dj_toi
+   a -> dj_lui
+   a -> dj_nous
+   a -> dj_vous
+   a -> dj_eux
+
+  # Demonstrative adjectives
+  da_ce [label="{ce/cet/cette}|{this}"];
+  da_ces [label="{ces}|{these}"];
+  noun [label="noun"];
+   da_ce -> noun
+   da_ces -> noun
+   verb -> da_ce
+   verb -> da_ces
+  ci [label="{-ci}|{(this/these)}"];
+  là [label="{-là}|{(that/those)}"];
+   noun -> ci
+   noun -> là
+
+  # Demonstrative pronouns
+  dp_celui [label="{celui/celle}|{this one}"];
+  dp_ceux [label="{ceux/celles}|{these ones}"];
+   dp_celui -> ci
+   dp_celui -> là
+   dp_ceux -> ci
+   dp_ceux -> là
+   verb -> dp_celui
+   verb -> dp_ceux
+}

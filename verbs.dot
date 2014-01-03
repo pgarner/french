@@ -1,0 +1,130 @@
+#
+# French verb graph
+#
+# Key:
+#  R: regular
+#  ER: regular -er
+#  IR: regular -ir
+#  RE: regular -re
+#
+#  P: present
+#  F: future
+#  I: imperfect
+#  C: conditional
+#
+#  B: base
+#  C: conjugation
+#
+
+digraph verbs {
+  node [shape=record];
+
+  R_F_C  [label="{-ai\l-as\l-a\l}|{-ons\l-ez\l-ont\l}"];
+  R_I_C  [label="{-ais\l-ais\l-ait\l}|{-ions\l-iez\l-aient\l}"];
+
+  ER [label="regular-er"];
+  ER_P_B [label="{present|root-}"]
+  ER_P_C  [label="{-e\l-es\l-e\l}|{-ons\l-ez\l-ent\l}"];
+   ER -> ER_P_B
+   ER_P_B -> ER_P_C
+  ER_F_B [label="{future|root-er-}"]
+   ER -> ER_F_B
+   ER_F_B -> R_F_C
+  ER_I_B [label="{imperfect|root-}"]
+   ER -> ER_I_B
+   ER_I_B -> R_I_C
+  ER_C_B [label="{conditional|root-er-}"]
+   ER -> ER_C_B
+   ER_C_B -> R_I_C
+
+  IR [label="regular-ir"];
+  IR_P_B [label="{present|root-}"]
+  IR_P_C  [label="{-is\l-is\l-it\l}|{-issons\l-issez\l-issent\l}"];
+   IR -> IR_P_B
+   IR_P_B -> IR_P_C
+  IR_F_B [label="{future|root-ir-}"]
+   IR -> IR_F_B
+   IR_F_B -> R_F_C
+  IR_I_B [label="{imperfect|root-iss-}"]
+   IR -> IR_I_B
+   IR_I_B -> R_I_C
+  IR_C_B [label="{conditional|root-ir-}"]
+   IR -> IR_C_B
+   IR_C_B -> R_I_C
+
+  RE [label="regular-re"];
+  RE_P_B [label="{present|root-}"]
+  RE_P_C  [label="{-s\l-s\l-t\l}|{-ons\l-ez\l-ent\l}"];
+   RE -> RE_P_B
+   RE_P_B -> RE_P_C
+  RE_F_B [label="{future|root-r-}"]
+   RE -> RE_F_B
+   RE_F_B -> R_F_C
+#  RE_I_B [label="{imperfect|root-}"]
+#   RE -> RE_I_B
+#   RE_I_B -> R_I_C
+    RE -> ER_I_B
+  RE_C_B [label="{conditional|root-r-}"]
+   RE -> RE_C_B
+   RE_C_B -> R_I_C
+
+  aller [label="aller"]
+  aller_P_B [label="{present|irregular}"]
+  aller_P_C  [label="{vais\lvas\lva\l}|{allons\lallez\lvont\l}"];
+   aller -> aller_P_B
+   aller_P_B -> aller_P_C
+  aller_F_B [label="{future|ir-}"]
+   aller -> aller_F_B
+   aller_F_B -> R_F_C
+  aller_I_B [label="{imperfect|all-}"]
+   aller -> aller_I_B
+   aller_I_B -> R_I_C
+  aller_C_B [label="{conditional|ir-}"]
+   aller -> aller_C_B
+   aller_C_B -> R_I_C
+
+  avoir [label="avoir"]
+  avoir_P_B [label="{present|irregular}"]
+  avoir_P_C  [label="{ai\las\la\l}|{avons\lavez\lont\l}"];
+   avoir -> avoir_P_B
+   avoir_P_B -> avoir_P_C
+  avoir_F_B [label="{future|aur-}"]
+   avoir -> avoir_F_B
+   avoir_F_B -> R_F_C
+  avoir_I_B [label="{imperfect|av-}"]
+   avoir -> avoir_I_B
+   avoir_I_B -> R_I_C
+  avoir_C_B [label="{conditional|aur-}"]
+   avoir -> avoir_C_B
+   avoir_C_B -> R_I_C
+
+  être [label="être"]
+  être_P_B [label="{present|irregular}"]
+  être_P_C  [label="{suis\les\lest\l}|{sommes\lêtes\lsont\l}"];
+   être -> être_P_B
+   être_P_B -> être_P_C
+  être_F_B [label="{future|ser-}"]
+   être -> être_F_B
+   être_F_B -> R_F_C
+  être_I_B [label="{imperfect|ét-}"]
+   être -> être_I_B
+   être_I_B -> R_I_C
+  être_C_B [label="{conditional|ser-}"]
+   être -> être_C_B
+   être_C_B -> R_I_C
+
+  faire [label="faire"]
+  faire_P_B [label="{present|irregular}"]
+  faire_P_C  [label="{fais\lfais\lfait\l}|{faisons\lfaites\lfont\l}"];
+   faire -> faire_P_B
+   faire_P_B -> faire_P_C
+  faire_F_B [label="{future|fer-}"]
+   faire -> faire_F_B
+   faire_F_B -> R_F_C
+  faire_I_B [label="{imperfect|fais-}"]
+   faire -> faire_I_B
+   faire_I_B -> R_I_C
+  faire_C_B [label="{conditional|fer-}"]
+   faire -> faire_C_B
+   faire_C_B -> R_I_C
+}

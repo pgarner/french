@@ -125,16 +125,27 @@ digraph verbs {
    noun -> ci
    noun -> là
 
-  # Demonstrative pronouns
-  subgraph cluster_dp {
-    label="Demonstrative pronoun";
-    dp_celui [label="{celui/celle}|{this one}"];
-    dp_ceux [label="{ceux/celles}|{these ones}"];
+  # Indefinite demonstrative pronouns
+  subgraph cluster_idp {
+    label="Indefinite\ndemonstrative pronoun";
+    idp_ce [label="{ce}|{this/it}"];
+    idp_ceci [label="{ceci (or ça)}|{this}"];
+    idp_cela [label="{cela (or ça)}|{that}"];
   }
-   dp_celui -> ci
-   dp_celui -> là
-   dp_ceux -> ci
-   dp_ceux -> là
-   verb -> dp_celui
-   verb -> dp_ceux
+   idp_ce -> verb
+   idp_ceci -> verb
+   idp_cela -> verb
+
+  # Variable demonstrative pronouns
+  subgraph cluster_vdp {
+    label="Variable\ndemonstrative pronoun";
+    vdp_celui [label="{celui/celle}|{this one}"];
+    vdp_ceux [label="{ceux/celles}|{these ones}"];
+  }
+   vdp_celui -> ci
+   vdp_celui -> là
+   vdp_ceux -> ci
+   vdp_ceux -> là
+   verb -> vdp_celui
+   verb -> vdp_ceux
 }

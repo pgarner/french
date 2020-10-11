@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Copyright 2020 by Philip N. Garner
 #
@@ -9,95 +9,75 @@
 #
 
 class Verb:
-    def __init__(self, stem):
-        self.stem = stem
+    def __init__(self, stem, verb=None):
+        self.stem = stem # The stem, for most tenses
+        self.verb = verb # The longer stem, for future and conditional
 
-    def conj(self, suff):
+    def sconj(self, suff):
         def concat(a):
             return self.stem+a
         return list(map(concat, suff))
 
+    def vconj(self, suff):
+        def concat(a):
+            return self.verb+a
+        return list(map(concat, suff))
 
-# This is just a base class; it is here to capitalise on the fact that the
-# imperfect and conditional share conjugations.
+
+# The regular conjugations, based on either the stem or the verb itself
 class Regular(Verb):
+    imp = ['ais', 'ais', 'ait', 'ions', 'iez', 'aient']
+
     def present(self):
-        return self.conj(['e', 'es', 'e', 'ons', 'ez', 'ent'])
+        return self.sconj(['e', 'es', 'e', 'ons', 'ez', 'ent'])
 
     def imperfect(self):
-        return self.conj(['ais', 'ais', 'ait', 'ions', 'iez', 'aient'])
+        return self.sconj(self.imp)
 
     def future(self):
-        return self.conj(['ai', 'as', 'a', 'ons', 'ez', 'ont'])
+        return self.vconj(['ai', 'as', 'a', 'ons', 'ez', 'ont'])
 
     def historic(self):
-        return self.conj(['ai', 'as', 'a', 'âmes', 'âtes', 'èrent'])
+        return self.sconj(['ai', 'as', 'a', 'âmes', 'âtes', 'èrent'])
 
     def conditional(self):
-        return self.imperfect() # Same as imperfect, but with the stem
+        return self.vconj(self.imp) # As imperfect, but with the longer stem
 
     def participles(self):
-        return self.conj(['ant', 'é'])
-
-
-# This is the true regular class
-class RegularER(Regular):
-    def future(self):
-        v = Regular(self.stem+'er')
-        return v.future()
-
-    def conditional(self):
-        v = Regular(self.stem+'er')
-        return v.imperfect()
+        return self.sconj(['ant', 'é'])
 
 
 # E.g., finir
 class RegularIR(Regular):
     def present(self):
-        return self.conj(['is', 'is', 'it', 'issons', 'issez', 'issent'])
+        return self.sconj(['is', 'is', 'it', 'issons', 'issez', 'issent'])
 
     def imperfect(self):
         v = Regular(self.stem+'iss')
         return v.imperfect()
 
-    def future(self):
-        v = Regular(self.stem+'ir')
-        return v.future()
-
     def historic(self):
-        return self.conj(['is', 'is', 'it', 'îmes', 'îtes', 'irent'])
-
-    def conditional(self):
-        v = Regular(self.stem+'ir')
-        return v.conditional()
+        return self.sconj(['is', 'is', 'it', 'îmes', 'îtes', 'irent'])
 
     def participles(self):
-        return self.conj(['issant', 'i'])
+        return self.sconj(['issant', 'i'])
 
 
 # Based on conduire, but it's a bad example
 class RegularRE(Regular):
     def present(self):
-        return self.conj(['s', 's', 't', 'sons', 'sez', 'sent'])
+        return self.sconj(['s', 's', 't', 'sons', 'sez', 'sent'])
 
     def imperfect(self):
         v = Regular(self.stem+'s')
         return v.imperfect()
 
-    def future(self):
-        v = Regular(self.stem+'r')
-        return v.future()
-
     def historic(self):
         v = RegularIR(self.stem+'s')
         return v.historic()
 
-    def conditional(self):
-        v = Regular(self.stem+'r')
-        return v.conditional()
-
     def participles(self):
-        return self.conj(['ant', 'é'])
+        return self.sconj(['sant', 't'])
 
 
 def split_stem(verb):
@@ -108,11 +88,11 @@ def split_stem(verb):
 def toClass(verb):
     [stem, suff] = split_stem(verb)
     if suff == 'er':
-        return RegularER(stem)
-    elif suff == 're':
-        return RegularRE(stem)
+        return Regular(stem, verb)
     elif suff == 'ir':
-        return RegularIR(stem)
+        return RegularIR(stem, verb)
+    elif suff == 're':
+        return RegularRE(stem, stem+'r')
     print('Unknown suffix: %s (%s)' % (verb, suff))
     exit()
 

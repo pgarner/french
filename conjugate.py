@@ -80,12 +80,60 @@ class RegularRE(Regular):
         return self.sconj(['sant', 't'])
 
 
+class Etre(Regular):
+    def __init__(self):
+        self.stem = 'ét'
+        self.verb = 'ser'
+
+    def present(self):
+        return ['suis', 'es', 'est', 'sommes', 'êtes', 'sont']
+
+    def historic(self):
+        return ['fus', 'fus', 'fut', 'fûmes', 'fûtes', 'furent']
+
+
+class Avoir(Regular):
+    def __init__(self):
+        self.stem = 'av'
+        self.verb = 'aur'
+
+    def present(self):
+        return ['ai', 'as', 'a', 'avons', 'avez', 'ont']
+
+    def historic(self):
+        return ['eus', 'eus', 'eut', 'eûmes', 'eûtes', 'eurent']
+
+    def participles(self):
+        return ['ayant', 'eu']
+
+
+class Faire(Regular):
+    def __init__(self):
+        self.stem = 'fais'
+        self.verb = 'fer'
+
+    def present(self):
+        return ['fais', 'fais', 'fait', 'faisons', 'faites', 'font']
+
+    def historic(self):
+        return ['fis', 'fis', 'fit', 'fimes', 'fites', 'firent']
+
+    def participles(self):
+        return ['faisant', 'fait']
+
+
 def split_stem(verb):
     stem = verb[:-2]
     suff = verb[-2:]
     return [stem, suff]
 
 def toClass(verb):
+    # First check if the (irregular) verb exists as an explicit class
+    cverb = verb.capitalize()
+    if cverb in globals():
+        return globals()[cverb]()
+
+    # Otherwise, try a (regular) solution via the suffix
     [stem, suff] = split_stem(verb)
     if suff == 'er':
         return Regular(stem, verb)

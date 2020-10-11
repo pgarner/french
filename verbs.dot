@@ -98,19 +98,22 @@ digraph verbs {
    avoir -> avoir_C_B
    avoir_C_B -> R_I_C
 
-  être [label="être"]
+  subgraph cluster_être {
+    label="être"
+#  être [label="être"]
   être_P_B [label="{present|irregular}"]
-  être_P_C  [label="{suis\les\lest\l}|{sommes\lêtes\lsont\l}"];
-   être -> être_P_B
-   être_P_B -> être_P_C
   être_F_B [label="{future|ser-}"]
-   être -> être_F_B
-   être_F_B -> R_F_C
   être_I_B [label="{imperfect|ét-}"]
-   être -> être_I_B
-   être_I_B -> R_I_C
   être_C_B [label="{conditional|ser-}"]
-   être -> être_C_B
+}
+  être_P_C  [label="{suis\les\lest\l}|{sommes\lêtes\lsont\l}"];
+#   être -> être_P_B
+   être_P_B -> être_P_C
+#   être -> être_F_B
+   être_F_B -> R_F_C
+#   être -> être_I_B
+   être_I_B -> R_I_C
+#   être -> être_C_B
    être_C_B -> R_I_C
 
   faire [label="faire"]

@@ -47,8 +47,20 @@ class Regular(Verb):
         return self.sconj(['ant', 'é'])
 
 
+# E.g., repondre
+class RegularRE(Regular):
+    def present(self):
+        return self.sconj(['s', 's', '', 'ons', 'ez', 'ent'])
+
+    def historic(self):
+        return self.sconj(['is', 'is', 'it', 'îmes', 'îtes', 'irent'])
+
+    def participles(self):
+        return self.sconj(['ant', 'u'])
+
+
 # E.g., finir
-class RegularIR(Regular):
+class RegularIR(RegularRE):
     def present(self):
         return self.sconj(['is', 'is', 'it', 'issons', 'issez', 'issent'])
 
@@ -56,28 +68,20 @@ class RegularIR(Regular):
         v = Regular(self.stem+'iss')
         return v.imperfect()
 
-    def historic(self):
-        return self.sconj(['is', 'is', 'it', 'îmes', 'îtes', 'irent'])
-
     def participles(self):
         return self.sconj(['issant', 'i'])
 
 
-# Based on conduire, but it's a bad example
-class RegularRE(Regular):
+class Conduire(RegularRE):
+    def __init__(self):
+        self.stem = 'conduis'
+        self.verb = 'conduir'
+
     def present(self):
-        return self.sconj(['s', 's', 't', 'sons', 'sez', 'sent'])
-
-    def imperfect(self):
-        v = Regular(self.stem+'s')
-        return v.imperfect()
-
-    def historic(self):
-        v = RegularIR(self.stem+'s')
-        return v.historic()
+        return ['conduis', 'conduis', 'conduit', 'conduisons', 'conduisez', 'conduisent']
 
     def participles(self):
-        return self.sconj(['sant', 't'])
+        return ['conduisant', 'conduit']
 
 
 class Etre(Regular):
@@ -120,6 +124,21 @@ class Faire(Regular):
 
     def participles(self):
         return ['faisant', 'fait']
+
+
+class Voir(Regular):
+    def __init__(self):
+        self.stem = 'voy'
+        self.verb = 'verr'
+
+    def present(self):
+        return ['vois', 'vois', 'voit', 'voyons', 'voyez', 'voient']
+
+    def historic(self):
+        return ['vis', 'vis', 'vit', 'vîmes', 'vîtes', 'virent']
+
+    def participles(self):
+        return ['voyant', 'vu']
 
 
 def split_stem(verb):

@@ -43,8 +43,14 @@ class Regular(Verb):
     def conditional(self):
         return self.vconj(self.imp) # As imperfect, but with the longer stem
 
+    def particpres(self):
+        return self.sconj(['ant'])
+
+    def particpast(self):
+        return self.sconj(['é'])
+
     def participles(self):
-        return self.sconj(['ant', 'é'])
+        return self.particpres() + self.particpast()
 
 
 # E.g., repondre
@@ -55,8 +61,8 @@ class RegularRE(Regular):
     def historic(self):
         return self.sconj(['is', 'is', 'it', 'îmes', 'îtes', 'irent'])
 
-    def participles(self):
-        return self.sconj(['ant', 'u'])
+    def particpast(self):
+        return self.sconj(['u'])
 
 
 # E.g., finir
@@ -68,8 +74,11 @@ class RegularIR(RegularRE):
         v = Regular(self.stem+'iss')
         return v.imperfect()
 
-    def participles(self):
-        return self.sconj(['issant', 'i'])
+    def particpres(self):
+        return self.sconj(['issant'])
+
+    def particpast(self):
+        return self.sconj(['i'])
 
 
 class Conduire(RegularRE):
@@ -80,8 +89,8 @@ class Conduire(RegularRE):
     def present(self):
         return ['conduis', 'conduis', 'conduit', 'conduisons', 'conduisez', 'conduisent']
 
-    def participles(self):
-        return ['conduisant', 'conduit']
+    def particpast(self):
+        return ['conduit']
 
 
 class Etre(Regular):
@@ -107,8 +116,11 @@ class Avoir(Regular):
     def historic(self):
         return ['eus', 'eus', 'eut', 'eûmes', 'eûtes', 'eurent']
 
-    def participles(self):
-        return ['ayant', 'eu']
+    def particpres(self):
+        return ['ayant']
+
+    def particpast(self):
+        return ['eu']
 
 
 class Faire(Regular):
@@ -122,8 +134,8 @@ class Faire(Regular):
     def historic(self):
         return ['fis', 'fis', 'fit', 'fimes', 'fites', 'firent']
 
-    def participles(self):
-        return ['faisant', 'fait']
+    def particpast(self):
+        return ['fait']
 
 
 class Voir(Regular):
@@ -137,8 +149,8 @@ class Voir(Regular):
     def historic(self):
         return ['vis', 'vis', 'vit', 'vîmes', 'vîtes', 'virent']
 
-    def participles(self):
-        return ['voyant', 'vu']
+    def particpast(self):
+        return ['vu']
 
 
 def split_stem(verb):

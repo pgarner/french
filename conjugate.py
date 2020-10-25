@@ -26,59 +26,68 @@ class Verb:
 
 # The regular conjugations, based on either the stem or the verb itself
 class Regular(Verb):
+    pre = ['e', 'es', 'e', 'ons', 'ez', 'ent']
     imp = ['ais', 'ais', 'ait', 'ions', 'iez', 'aient']
+    pas = ['ai', 'as', 'a', 'âmes', 'âtes', 'èrent']
+    fut = ['ai', 'as', 'a', 'ons', 'ez', 'ont']
+    subPre = ['e', 'es', 'e', 'ions', 'iez', 'ent']
+    subImp = ['asse', 'asses', 'ât', 'assions', 'assiez', 'assent']
+    parPre = ['ant']
+    parPas = ['é']
 
-    def present(self):
-        return self.sconj(['e', 'es', 'e', 'ons', 'ez', 'ent'])
+    def indPresent(self):
+        return self.sconj(self.pre)
 
-    def imperfect(self):
+    def indImperfect(self):
         return self.sconj(self.imp)
 
-    def future(self):
-        return self.vconj(['ai', 'as', 'a', 'ons', 'ez', 'ont'])
+    def indSimplePast(self):
+        return self.sconj(self.pas)
 
-    def historic(self):
-        return self.sconj(['ai', 'as', 'a', 'âmes', 'âtes', 'èrent'])
+    def indSimpleFuture(self):
+        return self.vconj(self.fut)
 
     def conditional(self):
-        return self.vconj(self.imp) # As imperfect, but with the longer stem
+        # As indicative imperfect, but with the longer stem
+        return self.vconj(self.imp)
 
-    def particpres(self):
-        return self.sconj(['ant'])
+    def subPresent(self):
+        return self.sconj(self.subPre)
 
-    def particpast(self):
-        return self.sconj(['é'])
+    def subImperfect(self):
+        return self.sconj(self.subImp)
+
+    def partPresent(self):
+        return self.sconj(self.parPre)
+
+    def partPast(self):
+        return self.sconj(self.parPas)
 
     def participles(self):
-        return self.particpres() + self.particpast()
+        return self.partPresent() + self.partPast()
 
 
 # E.g., repondre
 class RegularRE(Regular):
-    def present(self):
-        return self.sconj(['s', 's', '', 'ons', 'ez', 'ent'])
-
-    def historic(self):
-        return self.sconj(['is', 'is', 'it', 'îmes', 'îtes', 'irent'])
-
-    def particpast(self):
-        return self.sconj(['u'])
+    pre = ['s', 's', '', 'ons', 'ez', 'ent']
+    pas = ['is', 'is', 'it', 'îmes', 'îtes', 'irent']
+    subImp = ['isse', 'isses', 'ît', 'issions', 'issiez', 'issent']
+    parPas = ['u']
 
 
 # E.g., finir
 class RegularIR(RegularRE):
-    def present(self):
-        return self.sconj(['is', 'is', 'it', 'issons', 'issez', 'issent'])
+    pre = ['is', 'is', 'it', 'issons', 'issez', 'issent']
+    parPre = ['issant']
+    parPas = ['i']
 
-    def imperfect(self):
+    def indImperfect(self):
         v = Regular(self.stem+'iss')
-        return v.imperfect()
+        return v.indImperfect()
 
-    def particpres(self):
-        return self.sconj(['issant'])
-
-    def particpast(self):
-        return self.sconj(['i'])
+    def subPresent(self):
+        v = Regular(self.stem+'iss')
+        return v.subPresent()
 
 
 class Conduire(RegularRE):
@@ -86,10 +95,10 @@ class Conduire(RegularRE):
         self.stem = 'conduis'
         self.verb = 'conduir'
 
-    def present(self):
+    def indPresent(self):
         return ['conduis', 'conduis', 'conduit', 'conduisons', 'conduisez', 'conduisent']
 
-    def particpast(self):
+    def partPast(self):
         return ['conduit']
 
 
@@ -98,11 +107,17 @@ class Etre(Regular):
         self.stem = 'ét'
         self.verb = 'ser'
 
-    def present(self):
+    def indPresent(self):
         return ['suis', 'es', 'est', 'sommes', 'êtes', 'sont']
 
-    def historic(self):
+    def indSimplePast(self):
         return ['fus', 'fus', 'fut', 'fûmes', 'fûtes', 'furent']
+
+    def subPresent(self):
+        return ['sois', 'sois', 'soit', 'soyons', 'soyez', 'soient']
+
+    def subImperfect(self):
+        return ['fusse', 'fusses', 'fût', 'fussions', 'fussiez', 'fussent']
 
 
 class Avoir(Regular):
@@ -110,16 +125,16 @@ class Avoir(Regular):
         self.stem = 'av'
         self.verb = 'aur'
 
-    def present(self):
+    def indPresent(self):
         return ['ai', 'as', 'a', 'avons', 'avez', 'ont']
 
-    def historic(self):
+    def indSimplePast(self):
         return ['eus', 'eus', 'eut', 'eûmes', 'eûtes', 'eurent']
 
-    def particpres(self):
+    def partPresent(self):
         return ['ayant']
 
-    def particpast(self):
+    def partPast(self):
         return ['eu']
 
 
@@ -128,13 +143,13 @@ class Faire(Regular):
         self.stem = 'fais'
         self.verb = 'fer'
 
-    def present(self):
+    def indPresent(self):
         return ['fais', 'fais', 'fait', 'faisons', 'faites', 'font']
 
-    def historic(self):
+    def indSimplePast(self):
         return ['fis', 'fis', 'fit', 'fimes', 'fites', 'firent']
 
-    def particpast(self):
+    def partPast(self):
         return ['fait']
 
 
@@ -143,14 +158,29 @@ class Voir(Regular):
         self.stem = 'voy'
         self.verb = 'verr'
 
-    def present(self):
+    def indPresent(self):
         return ['vois', 'vois', 'voit', 'voyons', 'voyez', 'voient']
 
-    def historic(self):
+    def indSimplePast(self):
         return ['vis', 'vis', 'vit', 'vîmes', 'vîtes', 'virent']
 
-    def particpast(self):
+    def partPast(self):
         return ['vu']
+
+
+class Pouvoir(Regular):
+    def __init__(self):
+        self.stem = 'pouv'
+        self.verb = 'pourr'
+
+    def indPresent(self):
+        return ['peux', 'peux', 'peut', 'pouvons', 'pouvez', 'peuvent']
+
+    def indSimplePast(self):
+        return ['pus', 'pus', 'put', 'pûmes', 'pûtes', 'purent']
+
+    def partPast(self):
+        return ['pu']
 
 
 def split_stem(verb):
@@ -185,12 +215,14 @@ arg = ap.parse_args()
 for verb in arg.verbs:
     print(verb)
     v = toClass(verb)
-    print('Present:     %s' % v.present())
-    print('Imperfect:   %s' % v.imperfect())
-    print('Future:      %s' % v.future())
-    print('Historic:    %s' % v.historic())
-    print('Conditional: %s' % v.conditional())
-    print('Participles: %s' % v.participles())
+    print('Ind. Present:       %s' % v.indPresent())
+    print('Ind. Imperfect:     %s' % v.indImperfect())
+    print('Ind. Simple past:   %s' % v.indSimplePast())
+    print('Ind. Simple future: %s' % v.indSimpleFuture())
+    print('Conditional:        %s' % v.conditional())
+    print('Sub. Present:       %s' % v.subPresent())
+    print('Sub. Imperfect:     %s' % v.subImperfect())
+    print('Participles:        %s' % v.participles())
 
 # All done; just drop out
 #print("Args:", arg)

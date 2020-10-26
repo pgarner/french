@@ -131,6 +131,12 @@ class Avoir(Regular):
     def indSimplePast(self):
         return ['eus', 'eus', 'eut', 'eûmes', 'eûtes', 'eurent']
 
+    def subPresent(self):
+        return ['aie', 'aies', 'ait', 'ayons', 'ayez', 'aient']
+
+    def subImperfect(self):
+        return ['eusse', 'eusses', 'eût', 'eussions', 'eussiez', 'eussent']
+
     def partPresent(self):
         return ['ayant']
 
@@ -164,6 +170,12 @@ class Voir(Regular):
     def indSimplePast(self):
         return ['vis', 'vis', 'vit', 'vîmes', 'vîtes', 'virent']
 
+    def subPresent(self):
+        return ['voie', 'voies', 'vois', 'voyions', 'voyiez', 'voient']
+
+    def subImperfect(self):
+        return ['visse', 'visses', 'vît', 'vissions', 'vissiez', 'vissent']
+
     def partPast(self):
         return ['vu']
 
@@ -178,6 +190,12 @@ class Pouvoir(Regular):
 
     def indSimplePast(self):
         return ['pus', 'pus', 'put', 'pûmes', 'pûtes', 'purent']
+
+    def subPresent(self):
+        return ['puisse', 'puisses', 'puisse', 'puissions', 'puissiez', 'puissent']
+
+    def subImperfect(self):
+        return ['pusse', 'pusses', 'pût', 'pussions', 'pussiez', 'pussent']
 
     def partPast(self):
         return ['pu']

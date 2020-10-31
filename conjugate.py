@@ -9,6 +9,8 @@
 #
 
 class Verb:
+    aux = 'avoir'    # The auxiliary for the perfect &c
+
     def __init__(self, stem, verb=None):
         self.stem = stem # The stem, for most tenses
         self.verb = verb # The longer stem, for future and conditional
@@ -26,36 +28,55 @@ class Verb:
 
 # The regular conjugations, based on either the stem or the verb itself
 class Regular(Verb):
-    pre = ['e', 'es', 'e', 'ons', 'ez', 'ent']
-    imp = ['ais', 'ais', 'ait', 'ions', 'iez', 'aient']
-    pas = ['ai', 'as', 'a', 'âmes', 'âtes', 'èrent']
-    fut = ['ai', 'as', 'a', 'ons', 'ez', 'ont']
-    subPre = ['e', 'es', 'e', 'ions', 'iez', 'ent']
-    subImp = ['asse', 'asses', 'ât', 'assions', 'assiez', 'assent']
+    # Indicative present
+    preS = ['e', 'es', 'e']
+    preP = ['ons', 'ez', 'ent']
+
+    # Indicative imperfect
+    impS = ['ais', 'ais', 'ait']
+    impP = ['ions', 'iez', 'aient']
+
+    # Indicative simple past
+    pasS = ['ai', 'as', 'a']
+    pasP = ['âmes', 'âtes', 'èrent']
+
+    # Indicative simple future
+    futS = pasS
+    futP = ['ons', 'ez', 'ont']
+
+    # Subjunctive present
+    subPreS = preS
+    subPreP = ['ions', 'iez', 'ent']
+
+    # Subjunctive imperfect
+    subImpS = ['asse', 'asses', 'ât']
+    subImpP = ['assions', 'assiez', 'assent']
+
+    # Participles
     parPre = ['ant']
     parPas = ['é']
 
     def indPresent(self):
-        return self.sconj(self.pre)
+        return self.sconj(self.preS + self.preP)
 
     def indImperfect(self):
-        return self.sconj(self.imp)
+        return self.sconj(self.impS + self.impP)
 
     def indSimplePast(self):
-        return self.sconj(self.pas)
+        return self.sconj(self.pasS + self.pasP)
 
     def indSimpleFuture(self):
-        return self.vconj(self.fut)
+        return self.vconj(self.futS + self.futP)
 
     def conditional(self):
         # As indicative imperfect, but with the longer stem
-        return self.vconj(self.imp)
+        return self.vconj(self.impS + self.impP)
 
     def subPresent(self):
-        return self.sconj(self.subPre)
+        return self.sconj(self.subPreS + self.subPreP)
 
     def subImperfect(self):
-        return self.sconj(self.subImp)
+        return self.sconj(self.subImpS + self.subImpP)
 
     def partPresent(self):
         return self.sconj(self.parPre)
@@ -69,15 +90,17 @@ class Regular(Verb):
 
 # E.g., repondre
 class RegularRE(Regular):
-    pre = ['s', 's', '', 'ons', 'ez', 'ent']
-    pas = ['is', 'is', 'it', 'îmes', 'îtes', 'irent']
+    preS = ['s', 's', '']
+    pasS = ['is', 'is', 'it']
+    pasP = ['îmes', 'îtes', 'irent']
     subImp = ['isse', 'isses', 'ît', 'issions', 'issiez', 'issent']
     parPas = ['u']
 
 
 # E.g., finir
 class RegularIR(RegularRE):
-    pre = ['is', 'is', 'it', 'issons', 'issez', 'issent']
+    preS = ['is', 'is', 'it']
+    preP = ['issons', 'issez', 'issent']
     parPre = ['issant']
     parPas = ['i']
 
@@ -171,7 +194,7 @@ class Voir(Regular):
         return ['vis', 'vis', 'vit', 'vîmes', 'vîtes', 'virent']
 
     def subPresent(self):
-        return ['voie', 'voies', 'vois', 'voyions', 'voyiez', 'voient']
+        return ['voie', 'voies', 'voie', 'voyions', 'voyiez', 'voient']
 
     def subImperfect(self):
         return ['visse', 'visses', 'vît', 'vissions', 'vissiez', 'vissent']
@@ -226,7 +249,7 @@ def toClass(verb):
 def format2(conj):
     print('     je {0:22} tu {1:22} elle {2}'.format(
         conj[0], conj[1], conj[2]))
-    print('     nous {1:20} vous {1:20} elles {2}'.format(
+    print('     nous {0:20} vous {1:20} elles {2}'.format(
         conj[3], conj[4], conj[5]))
 
 # This is the main program
@@ -238,8 +261,9 @@ arg = ap.parse_args()
 
 for verb in arg.verbs:
     v = toClass(verb)
-    print('Infinitive: {0}  Present Part.: {1}  Past Past.: {2}'.format(
-        verb, v.partPresent()[0], v.partPast()[0]))
+    print(verb.capitalize())
+    print('     en {0:22} on {1} {2}'.format(
+        v.partPresent()[0], toClass(v.aux).indPresent()[2], v.partPast()[0]))
     print('Ind. Present'); format2(v.indPresent())
     print('Ind. Imperfect'); format2(v.indImperfect())
     print('Ind. Simple Past'); format2(v.indSimplePast())

@@ -223,6 +223,12 @@ def toClass(verb):
     print('Unknown suffix: %s (%s)' % (verb, suff))
     exit()
 
+def format2(conj):
+    print('     je {0:22} tu {1:22} elle {2}'.format(
+        conj[0], conj[1], conj[2]))
+    print('     nous {1:20} vous {1:20} elles {2}'.format(
+        conj[3], conj[4], conj[5]))
+
 # This is the main program
 import argparse
 ap = argparse.ArgumentParser("conjugate")
@@ -231,16 +237,16 @@ ap.add_argument('verbs', metavar='VERB', type=str, nargs='+',
 arg = ap.parse_args()
 
 for verb in arg.verbs:
-    print(verb)
     v = toClass(verb)
-    print('Ind. Present:       %s' % v.indPresent())
-    print('Ind. Imperfect:     %s' % v.indImperfect())
-    print('Ind. Simple past:   %s' % v.indSimplePast())
-    print('Ind. Simple future: %s' % v.indSimpleFuture())
-    print('Conditional:        %s' % v.conditional())
-    print('Sub. Present:       %s' % v.subPresent())
-    print('Sub. Imperfect:     %s' % v.subImperfect())
-    print('Participles:        %s' % v.participles())
+    print('Infinitive: {0}  Present Part.: {1}  Past Past.: {2}'.format(
+        verb, v.partPresent()[0], v.partPast()[0]))
+    print('Ind. Present'); format2(v.indPresent())
+    print('Ind. Imperfect'); format2(v.indImperfect())
+    print('Ind. Simple Past'); format2(v.indSimplePast())
+    print('Ind. Simple Future'); format2(v.indSimpleFuture())
+    print('Conditional'); format2(v.conditional())
+    print('Sub. Present'); format2(v.subPresent())
+    print('Sub. Imperfect'); format2(v.subImperfect())
 
 # All done; just drop out
 #print("Args:", arg)

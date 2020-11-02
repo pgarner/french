@@ -93,7 +93,8 @@ class RegularRE(Regular):
     preS = ['s', 's', '']
     pasS = ['is', 'is', 'it']
     pasP = ['îmes', 'îtes', 'irent']
-    subImp = ['isse', 'isses', 'ît', 'issions', 'issiez', 'issent']
+    subImpS = ['isse', 'isses', 'ît']
+    subImpP = ['issions', 'issiez', 'issent']
     parPas = ['u']
 
 
@@ -125,7 +126,7 @@ class Conduire(RegularRE):
         return ['conduit']
 
 
-class Etre(Regular):
+class Être(Regular):
     def __init__(self):
         self.stem = 'ét'
         self.verb = 'ser'
@@ -224,6 +225,58 @@ class Pouvoir(Regular):
         return ['pu']
 
 
+class Savoir(Regular):
+    def __init__(self):
+        self.stem = 'sav'
+        self.verb = 'saur'
+
+    def indPresent(self):
+        return ['sais', 'sais', 'sait', 'savons', 'savez', 'savent']
+
+    def indSimplePast(self):
+        return ['sus', 'sus', 'sut', 'sûmes', 'sûtes', 'surent']
+
+    def subPresent(self):
+        v = Regular('sach')
+        return v.subPresent()
+
+    def subImperfect(self):
+        return ['susse', 'susses', 'sût', 'sussions', 'sussiez', 'sussent']
+
+    def partPresent(self):
+        return ['sachant']
+
+    def partPast(self):
+        return ['su']
+
+
+class Venir(Regular):
+    aux = 'être'
+
+    def __init__(self):
+        self.stem = 'ven'
+        self.verb = 'viendr'
+
+    def indPresent(self):
+        return ['viens', 'viens', 'vient', 'venons', 'venez', 'viennent']
+
+    def indSimplePast(self):
+        return ['vins', 'vins', 'vint', 'vînmes', 'vîntes', 'vinrent']
+
+    def subPresent(self):
+        v = Regular('sach')
+        return v.subPresent()
+
+    def subPresent(self):
+        return ['vienne', 'viennes', 'vienne', 'venions', 'veniez', 'viennent']
+
+    def subImperfect(self):
+        return ['vinsse', 'vinsses', 'vînt', 'vinssions', 'vinssiez', 'vinssent']
+
+    def partPast(self):
+       return ['venu']
+
+
 def split_stem(verb):
     stem = verb[:-2]
     suff = verb[-2:]
@@ -247,9 +300,9 @@ def toClass(verb):
     exit()
 
 def format2(conj):
-    print('     je {0:22} tu {1:22} elle {2}'.format(
+    print('     je {0:22}tu {1:22}elle {2}'.format(
         conj[0], conj[1], conj[2]))
-    print('     nous {0:20} vous {1:20} elles {2}'.format(
+    print('     nous {0:20}vous {1:20}elles {2}'.format(
         conj[3], conj[4], conj[5]))
 
 # This is the main program
@@ -262,7 +315,7 @@ arg = ap.parse_args()
 for verb in arg.verbs:
     v = toClass(verb)
     print(verb.capitalize())
-    print('     en {0:22} on {1} {2}'.format(
+    print('     en {0:22}on {1} {2}'.format(
         v.partPresent()[0], toClass(v.aux).indPresent()[2], v.partPast()[0]))
     print('Ind. Present'); format2(v.indPresent())
     print('Ind. Imperfect'); format2(v.indImperfect())

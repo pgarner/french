@@ -8,12 +8,13 @@
 #   Phil Garner, October 2020
 #
 
-# List of 'verb' forms of verbs with auxiliary etre
+# List of 'verb' forms of verbs with auxiliary être.
+# First two are aller and venir
 auxEtre = [
+    'ir',     'viendr',
     'entrer', 'sortir',
     'partir', 'arriver',
     'monter', 'decendre',
-    'aller',  'viendr',
     'naître', 'mourir',
     'rester', 'passer',
     'tomber', 'retourner'
@@ -297,6 +298,27 @@ class Savoir(Regular):
         return ['su']
 
 
+class Aller(Regular):
+    def __init__(self):
+        self.stem = 'all'
+        self.verb = 'ir'
+
+    def indPresent(self):
+        return ['vais', 'vas', 'va', 'allons', 'allez', 'vont']
+
+    def subPresent(self):
+        return ['aille', 'ailles', 'aille', 'allions', 'alliez', 'aillent']
+
+
+class Sortir(RegularRE):
+    def __init__(self):
+        self.stem = 'sort'
+        self.verb = 'sortir'
+
+    def indPresent(self):
+        return ['sors', 'sors', 'sort', 'sortons', 'sortez', 'sortent']
+
+
 class Venir(Regular):
     def __init__(self):
         self.stem = 'ven'
@@ -307,10 +329,6 @@ class Venir(Regular):
 
     def indSimplePast(self):
         return ['vins', 'vins', 'vint', 'vînmes', 'vîntes', 'vinrent']
-
-    def subPresent(self):
-        v = Regular('sach')
-        return v.subPresent()
 
     def subPresent(self):
         return ['vienne', 'viennes', 'vienne', 'venions', 'veniez', 'viennent']

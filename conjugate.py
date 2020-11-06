@@ -8,22 +8,41 @@
 #   Phil Garner, October 2020
 #
 
+# List of 'verb' forms of verbs with auxiliary etre
+auxEtre = [
+    'entrer', 'sortir',
+    'partir', 'arriver',
+    'monter', 'decendre',
+    'aller',  'viendr',
+    'naître', 'mourir',
+    'rester', 'passer',
+    'tomber', 'retourner'
+]
+
+
+# Prepend a string onto each element of an array
+def prepend(pre, arr):
+    def concat(a):
+        return pre + a
+    return list(map(concat, arr))
+
+# Base class for all verbs
 class Verb:
-    aux = 'avoir'    # The auxiliary for the perfect &c
+    # The auxiliary for the perfect &c
+    def aux(self):
+        if self.verb in auxEtre:
+            return 'être'
+        return 'avoir'
 
     def __init__(self, stem, verb=None):
         self.stem = stem # The stem, for most tenses
         self.verb = verb # The longer stem, for future and conditional
 
     def sconj(self, suff):
-        def concat(a):
-            return self.stem+a
-        return list(map(concat, suff))
+        return prepend(self.stem, suff)
 
     def vconj(self, suff):
-        def concat(a):
-            return self.verb+a
-        return list(map(concat, suff))
+        return prepend(self.verb, suff)
 
 
 # The regular conjugations, based on either the stem or the verb itself
@@ -56,8 +75,15 @@ class Regular(Verb):
     parPre = ['ant']
     parPas = ['é']
 
+    def indPresentS(self):
+        return self.sconj(self.preS)
+
+    def indPresentP(self):
+        return self.sconj(self.preP)
+
     def indPresent(self):
-        return self.sconj(self.preS + self.preP)
+        return self.indPresentS() + self.indPresentP()
+
 
     def indImperfect(self):
         return self.sconj(self.impS + self.impP)
@@ -225,6 +251,27 @@ class Pouvoir(Regular):
         return ['pu']
 
 
+class Vouloir(Regular):
+    def __init__(self):
+        self.stem = 'voul'
+        self.verb = 'voudr'
+
+    def indPresent(self):
+        return ['veux', 'veux', 'veut', 'voulons', 'voulez', 'veulent']
+
+    def indSimplePast(self):
+        return ['voulus', 'voulus', 'voulut', 'voulûmes', 'voulûtes', 'voulurent']
+
+    def subPresent(self):
+        return ['veuille', 'veuilles', 'veuille', 'voulions', 'vouliez', 'veuillent']
+
+    def subImperfect(self):
+        return ['voulusse', 'voulusses', 'voulût', 'voulussions', 'voulussiez', 'voulussent']
+
+    def partPast(self):
+        return ['voulu']
+
+
 class Savoir(Regular):
     def __init__(self):
         self.stem = 'sav'
@@ -251,8 +298,6 @@ class Savoir(Regular):
 
 
 class Venir(Regular):
-    aux = 'être'
-
     def __init__(self):
         self.stem = 'ven'
         self.verb = 'viendr'
@@ -316,7 +361,7 @@ for verb in arg.verbs:
     v = toClass(verb)
     print(verb.capitalize())
     print('     en {0:22}on {1} {2}'.format(
-        v.partPresent()[0], toClass(v.aux).indPresent()[2], v.partPast()[0]))
+        v.partPresent()[0], toClass(v.aux()).indPresent()[2], v.partPast()[0]))
     print('Ind. Present'); format2(v.indPresent())
     print('Ind. Imperfect'); format2(v.indImperfect())
     print('Ind. Simple Past'); format2(v.indSimplePast())

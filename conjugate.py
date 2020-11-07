@@ -11,15 +11,15 @@
 # Oracle: https://bescherelle.com/conjugueur.php
 
 # List of 'verb' forms of verbs with auxiliary être.
-# First two are aller and venir
+# First two are venir and aller
 auxEtre = [
-    'ir',     'viendr',
-    'entrer', 'sortir',
-    'partir', 'arriver',
-    'monter', 'decendre',
-    'naître', 'mourir',
-    'rester', 'passer',
-    'tomber', 'retourner'
+    'viendr',  'ir',       # Come, go
+    'entrer',  'sortir',   # Enter, go out
+    'arriver', 'partir',   # Arrive, leave
+    'monter',  'decendre', # Climb, descend
+    'naître',  'mourr',    # Be born, die
+    'rester',  'passer',   # Stay, pass
+    'tomber',  'retourner' # Fall, return
 ]
 
 
@@ -118,13 +118,15 @@ class Regular(Verb):
 
 
 # A regular base where the Indicative simple Past and Subjunctive Imperfect
-# change conjugation with a leading 'i'
-# This is common for group 2 and many group 3 verbs
+# change conjugation with a leading 'i'.  Also set the past participle to -i
+# since it seems to work for several verbs (group 2, sortir, partir)
+# This is the case for group 2 and many group 3 verbs
 class BaseIPSI(Regular):
     pasS = ['is', 'is', 'it']
     pasP = ['îmes', 'îtes', 'irent']
     subImpS = ['isse', 'isses', 'ît']
     subImpP = ['issions', 'issiez', 'issent']
+    parPas = ['i']
 
 
 # The regular group 2, ending in -ir, e.g., finir
@@ -133,7 +135,6 @@ class RegularIR(BaseIPSI):
     preS = ['is', 'is', 'it']
     preP = ['issons', 'issez', 'issent']
     parPre = ['issant']
-    parPas = ['i']
 
     def indImperfect(self):
         return Regular(self.stem+'iss').indImperfect()
@@ -238,7 +239,8 @@ class Pouvoir(Regular):
         return ['pus', 'pus', 'put', 'pûmes', 'pûtes', 'purent']
 
     def subPresent(self):
-        return ['puisse', 'puisses', 'puisse', 'puissions', 'puissiez', 'puissent']
+        return ['puisse', 'puisses', 'puisse',
+                'puissions', 'puissiez', 'puissent']
 
     def subImperfect(self):
         return ['pusse', 'pusses', 'pût', 'pussions', 'pussiez', 'pussent']
@@ -256,13 +258,16 @@ class Vouloir(Regular):
         return ['veux', 'veux', 'veut', 'voulons', 'voulez', 'veulent']
 
     def indSimplePast(self):
-        return ['voulus', 'voulus', 'voulut', 'voulûmes', 'voulûtes', 'voulurent']
+        return ['voulus', 'voulus', 'voulut',
+                'voulûmes', 'voulûtes', 'voulurent']
 
     def subPresent(self):
-        return ['veuille', 'veuilles', 'veuille', 'voulions', 'vouliez', 'veuillent']
+        return ['veuille', 'veuilles', 'veuille',
+                'voulions', 'vouliez', 'veuillent']
 
     def subImperfect(self):
-        return ['voulusse', 'voulusses', 'voulût', 'voulussions', 'voulussiez', 'voulussent']
+        return ['voulusse', 'voulusses', 'voulût',
+                'voulussions', 'voulussiez', 'voulussent']
 
     def partPast(self):
         return ['voulu']
@@ -273,8 +278,8 @@ class Savoir(Regular):
         self.stem = 'sav'
         self.verb = 'saur'
 
-    def indPresent(self):
-        return ['sais', 'sais', 'sait', 'savons', 'savez', 'savent']
+    def indPresentS(self):
+        return ['sais', 'sais', 'sait']
 
     def indSimplePast(self):
         return ['sus', 'sus', 'sut', 'sûmes', 'sûtes', 'surent']
@@ -304,46 +309,64 @@ class Aller(Regular):
         return ['aille', 'ailles', 'aille', 'allions', 'alliez', 'aillent']
 
 
-class Sortir(RegularRE):
+class Sortir(BaseIPSI):
     def __init__(self):
         self.stem = 'sort'
         self.verb = 'sortir'
 
-    def indPresent(self):
-        return ['sors', 'sors', 'sort', 'sortons', 'sortez', 'sortent']
-
-    def partPast(self):
-        return ['sorti']
+    def indPresentS(self):
+        return ['sors', 'sors', 'sort']
 
 
-class Partir(RegularRE):
+class Partir(BaseIPSI):
     def __init__(self):
         self.stem = 'part'
         self.verb = 'partir'
 
-    def indPresent(self):
-        return ['pars', 'pars', 'part', 'partons', 'partez', 'partent']
-
-    def partPast(self):
-        return ['parti']
+    def indPresentS(self):
+        return ['pars', 'pars', 'part']
 
 
-class Naître(RegularRE):
+class Naître(BaseIPSI):
     def __init__(self):
         self.stem = 'naiss'
         self.verb = 'naîtr'
 
-    def indPresent(self):
-        return ['nais', 'nais', 'naît', 'naissons', 'naissez', 'naissent']
+    def indPresentS(self):
+        return ['nais', 'nais', 'naît']
 
     def indSimplePast(self):
-        return RegularRE('naqu').indSimplePast()
+        return BaseIPSI('naqu').indSimplePast()
 
     def subImperfect(self):
-        return RegularRE('naqu').subImperfect()
+        return BaseIPSI('naqu').subImperfect()
 
     def partPast(self):
         return ['né']
+
+
+class Mourir(Regular):
+    def __init__(self):
+        self.stem = 'mour'
+        self.verb = 'mourr'
+
+    def indPresentS(self):
+        return ['meurs', 'meurs', 'meurt']
+
+    def indSimplePast(self):
+        return ['mourus', 'mourus', 'mourut',
+                'mourûmes', 'mourûtes', 'moururent']
+
+    def subPresent(self):
+        return ['meure', 'meures', 'meure',
+                'mourions', 'mouriez', 'meurent']
+
+    def subImperfect(self):
+        return ['mourusse', 'mourusses', 'mourût',
+                'mourussions', 'mourussiez', 'mourussent']
+
+    def partPast(self):
+        return ['mort']
 
 
 class Venir(Regular):
@@ -358,22 +381,24 @@ class Venir(Regular):
         return ['vins', 'vins', 'vint', 'vînmes', 'vîntes', 'vinrent']
 
     def subPresent(self):
-        return ['vienne', 'viennes', 'vienne', 'venions', 'veniez', 'viennent']
+        return ['vienne', 'viennes', 'vienne',
+                'venions', 'veniez', 'viennent']
 
     def subImperfect(self):
-        return ['vinsse', 'vinsses', 'vînt', 'vinssions', 'vinssiez', 'vinssent']
+        return ['vinsse', 'vinsses', 'vînt',
+                'vinssions', 'vinssiez', 'vinssent']
 
     def partPast(self):
        return ['venu']
 
 
-class Conduire(RegularRE):
+class Conduire(BaseIPSI):
     def __init__(self):
         self.stem = 'conduis'
         self.verb = 'conduir'
 
-    def indPresent(self):
-        return ['conduis', 'conduis', 'conduit', 'conduisons', 'conduisez', 'conduisent']
+    def indPresentS(self):
+        return ['conduis', 'conduis', 'conduit']
 
     def partPast(self):
         return ['conduit']

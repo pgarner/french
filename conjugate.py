@@ -8,6 +8,8 @@
 #   Phil Garner, October 2020
 #
 
+# Oracle: https://bescherelle.com/conjugueur.php
+
 # List of 'verb' forms of verbs with auxiliary être.
 # First two are aller and venir
 auxEtre = [
@@ -115,42 +117,35 @@ class Regular(Verb):
         return self.partPresent() + self.partPast()
 
 
-# E.g., repondre
-class RegularRE(Regular):
-    preS = ['s', 's', '']
+# A regular base where the Indicative simple Past and Subjunctive Imperfect
+# change conjugation with a leading 'i'
+# This is common for group 2 and many group 3 verbs
+class BaseIPSI(Regular):
     pasS = ['is', 'is', 'it']
     pasP = ['îmes', 'îtes', 'irent']
     subImpS = ['isse', 'isses', 'ît']
     subImpP = ['issions', 'issiez', 'issent']
-    parPas = ['u']
 
 
-# E.g., finir
-class RegularIR(RegularRE):
+# The regular group 2, ending in -ir, e.g., finir
+# Characterised by lots of -iss- in the conjugations
+class RegularIR(BaseIPSI):
     preS = ['is', 'is', 'it']
     preP = ['issons', 'issez', 'issent']
     parPre = ['issant']
     parPas = ['i']
 
     def indImperfect(self):
-        v = Regular(self.stem+'iss')
-        return v.indImperfect()
+        return Regular(self.stem+'iss').indImperfect()
 
     def subPresent(self):
-        v = Regular(self.stem+'iss')
-        return v.subPresent()
+        return Regular(self.stem+'iss').subPresent()
 
 
-class Conduire(RegularRE):
-    def __init__(self):
-        self.stem = 'conduis'
-        self.verb = 'conduir'
-
-    def indPresent(self):
-        return ['conduis', 'conduis', 'conduit', 'conduisons', 'conduisez', 'conduisent']
-
-    def partPast(self):
-        return ['conduit']
+# A regular group 3 verb class ending in -re, e.g., repondre, descendre
+class RegularRE(BaseIPSI):
+    preS = ['s', 's', '']
+    parPas = ['u']
 
 
 class Être(Regular):
@@ -285,8 +280,7 @@ class Savoir(Regular):
         return ['sus', 'sus', 'sut', 'sûmes', 'sûtes', 'surent']
 
     def subPresent(self):
-        v = Regular('sach')
-        return v.subPresent()
+        return Regular('sach').subPresent()
 
     def subImperfect(self):
         return ['susse', 'susses', 'sût', 'sussions', 'sussiez', 'sussent']
@@ -318,6 +312,39 @@ class Sortir(RegularRE):
     def indPresent(self):
         return ['sors', 'sors', 'sort', 'sortons', 'sortez', 'sortent']
 
+    def partPast(self):
+        return ['sorti']
+
+
+class Partir(RegularRE):
+    def __init__(self):
+        self.stem = 'part'
+        self.verb = 'partir'
+
+    def indPresent(self):
+        return ['pars', 'pars', 'part', 'partons', 'partez', 'partent']
+
+    def partPast(self):
+        return ['parti']
+
+
+class Naître(RegularRE):
+    def __init__(self):
+        self.stem = 'naiss'
+        self.verb = 'naîtr'
+
+    def indPresent(self):
+        return ['nais', 'nais', 'naît', 'naissons', 'naissez', 'naissent']
+
+    def indSimplePast(self):
+        return RegularRE('naqu').indSimplePast()
+
+    def subImperfect(self):
+        return RegularRE('naqu').subImperfect()
+
+    def partPast(self):
+        return ['né']
+
 
 class Venir(Regular):
     def __init__(self):
@@ -338,6 +365,18 @@ class Venir(Regular):
 
     def partPast(self):
        return ['venu']
+
+
+class Conduire(RegularRE):
+    def __init__(self):
+        self.stem = 'conduis'
+        self.verb = 'conduir'
+
+    def indPresent(self):
+        return ['conduis', 'conduis', 'conduit', 'conduisons', 'conduisez', 'conduisent']
+
+    def partPast(self):
+        return ['conduit']
 
 
 def split_stem(verb):

@@ -118,15 +118,26 @@ class Regular(Verb):
 
 
 # A regular base where the Indicative simple Past and Subjunctive Imperfect
-# change conjugation with a leading 'i'.  Also set the past participle to -i
-# since it seems to work for several verbs (group 2, sortir, partir)
+# change conjugation with a leading i-
 # This is the case for group 2 and many group 3 verbs
+# Also set the past participle to i since it seems to work for several verbs
+# (group 2, sortir, partir)
 class BaseIPSI(Regular):
     pasS = ['is', 'is', 'it']
     pasP = ['îmes', 'îtes', 'irent']
     subImpS = ['isse', 'isses', 'ît']
     subImpP = ['issions', 'issiez', 'issent']
     parPas = ['i']
+
+
+# Another regular base similar to BaseIPSI, but based on a leading u-
+# Again, the past participle is also set to u
+class BaseUPSI(Regular):
+    pasS = ['us', 'us', 'ut']
+    pasP = ['ûmes', 'ûtes', 'urent']
+    subImpS = ['usse', 'usses', 'ût']
+    subImpP = ['ussions', 'ussiez', 'ussent']
+    parPas = ['u']
 
 
 # The regular group 2, ending in -ir, e.g., finir
@@ -158,13 +169,13 @@ class Être(Regular):
         return ['suis', 'es', 'est', 'sommes', 'êtes', 'sont']
 
     def indSimplePast(self):
-        return ['fus', 'fus', 'fut', 'fûmes', 'fûtes', 'furent']
+        return BaseUPSI('f').indSimplePast()
 
     def subPresent(self):
         return ['sois', 'sois', 'soit', 'soyons', 'soyez', 'soient']
 
     def subImperfect(self):
-        return ['fusse', 'fusses', 'fût', 'fussions', 'fussiez', 'fussent']
+        return BaseUPSI('f').subImperfect()
 
 
 class Avoir(Regular):
@@ -176,13 +187,13 @@ class Avoir(Regular):
         return ['ai', 'as', 'a', 'avons', 'avez', 'ont']
 
     def indSimplePast(self):
-        return ['eus', 'eus', 'eut', 'eûmes', 'eûtes', 'eurent']
+        return BaseUPSI('e').indSimplePast()
 
     def subPresent(self):
         return ['aie', 'aies', 'ait', 'ayons', 'ayez', 'aient']
 
     def subImperfect(self):
-        return ['eusse', 'eusses', 'eût', 'eussions', 'eussiez', 'eussent']
+        return BaseUPSI('e').subImperfect()
 
     def partPresent(self):
         return ['ayant']
@@ -236,20 +247,20 @@ class Pouvoir(Regular):
         return ['peux', 'peux', 'peut', 'pouvons', 'pouvez', 'peuvent']
 
     def indSimplePast(self):
-        return ['pus', 'pus', 'put', 'pûmes', 'pûtes', 'purent']
+        return BaseUPSI('p').indSimplePast()
 
     def subPresent(self):
         return ['puisse', 'puisses', 'puisse',
                 'puissions', 'puissiez', 'puissent']
 
     def subImperfect(self):
-        return ['pusse', 'pusses', 'pût', 'pussions', 'pussiez', 'pussent']
+        return BaseUPSI('p').subImperfect()
 
     def partPast(self):
         return ['pu']
 
 
-class Vouloir(Regular):
+class Vouloir(BaseUPSI):
     def __init__(self):
         self.stem = 'voul'
         self.verb = 'voudr'
@@ -257,20 +268,9 @@ class Vouloir(Regular):
     def indPresent(self):
         return ['veux', 'veux', 'veut', 'voulons', 'voulez', 'veulent']
 
-    def indSimplePast(self):
-        return ['voulus', 'voulus', 'voulut',
-                'voulûmes', 'voulûtes', 'voulurent']
-
     def subPresent(self):
         return ['veuille', 'veuilles', 'veuille',
                 'voulions', 'vouliez', 'veuillent']
-
-    def subImperfect(self):
-        return ['voulusse', 'voulusses', 'voulût',
-                'voulussions', 'voulussiez', 'voulussent']
-
-    def partPast(self):
-        return ['voulu']
 
 
 class Savoir(Regular):
@@ -282,13 +282,13 @@ class Savoir(Regular):
         return ['sais', 'sais', 'sait']
 
     def indSimplePast(self):
-        return ['sus', 'sus', 'sut', 'sûmes', 'sûtes', 'surent']
+        return BaseUPSI('s').indSimplePast()
 
     def subPresent(self):
         return Regular('sach').subPresent()
 
     def subImperfect(self):
-        return ['susse', 'susses', 'sût', 'sussions', 'sussiez', 'sussent']
+        return BaseUPSI('s').subImperfect()
 
     def partPresent(self):
         return ['sachant']
@@ -345,7 +345,7 @@ class Naître(BaseIPSI):
         return ['né']
 
 
-class Mourir(Regular):
+class Mourir(BaseUPSI):
     def __init__(self):
         self.stem = 'mour'
         self.verb = 'mourr'
@@ -353,17 +353,9 @@ class Mourir(Regular):
     def indPresentS(self):
         return ['meurs', 'meurs', 'meurt']
 
-    def indSimplePast(self):
-        return ['mourus', 'mourus', 'mourut',
-                'mourûmes', 'mourûtes', 'moururent']
-
     def subPresent(self):
         return ['meure', 'meures', 'meure',
                 'mourions', 'mouriez', 'meurent']
-
-    def subImperfect(self):
-        return ['mourusse', 'mourusses', 'mourût',
-                'mourussions', 'mourussiez', 'mourussent']
 
     def partPast(self):
         return ['mort']

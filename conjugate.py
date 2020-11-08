@@ -424,14 +424,8 @@ def format2(conj):
     print('     nous {0:20}vous {1:20}elles {2}'.format(
         conj[3], conj[4], conj[5]))
 
-# This is the main program
-import argparse
-ap = argparse.ArgumentParser("conjugate")
-ap.add_argument('verbs', metavar='VERB', type=str, nargs='+',
-                help='verbs to conjugate')
-arg = ap.parse_args()
 
-for verb in arg.verbs:
+def conjSimple(verb):
     v = toClass(verb)
     print(verb.capitalize())
     print('     en {0:22}on {1} {2}'.format(
@@ -444,5 +438,37 @@ for verb in arg.verbs:
     print('Sub. Present'); format2(v.subPresent())
     print('Sub. Imperfect'); format2(v.subImperfect())
 
-# All done; just drop out
-#print("Args:", arg)
+
+# Tests
+import unittest
+import filecmp
+import sys
+class TestSimple(unittest.TestCase):
+    verbs = ['rester', 'passer', 'finir', 'descendre',
+             'être', 'avoir', 'faire', 'voir', 'pouvoir', 'vouloir',
+             'savoir', 'aller', 'sortir', 'partir', 'naître', 'mourir',
+             'venir', 'conduire']
+    def testSimple(self):
+        out = 'testSimple-out.txt'
+        ref = 'testSimple-ref.txt'
+        with open(out, 'w') as f:
+            sys.stdout = f
+            for verb in self.verbs:
+                conjSimple(verb)
+        self.assertTrue(filecmp.cmp(out, ref))
+
+
+# This is the main program
+import argparse
+ap = argparse.ArgumentParser("conjugate")
+ap.add_argument('verb', type=str, nargs='*', help='verbs to conjugate')
+ap.add_argument('-t',   action='store_true', help='run the tests')
+arg = ap.parse_args()
+
+for verb in arg.verb:
+    conjSimple(verb)
+
+if arg.t:
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestSimple)
+    runner = unittest.TextTestRunner()
+    runner.run(suite)

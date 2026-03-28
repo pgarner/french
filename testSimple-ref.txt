@@ -1,0 +1,414 @@
+Rester
+     en restant               on est resté
+Ind. Present
+     je reste                 tu restes                elle reste
+     nous restons             vous restez              elles restent
+Ind. Imperfect
+     je restais               tu restais               elle restait
+     nous restions            vous restiez             elles restaient
+Ind. Simple Past
+     je restai                tu restas                elle resta
+     nous restâmes            vous restâtes            elles restèrent
+Ind. Simple Future
+     je resterai              tu resteras              elle restera
+     nous resterons           vous resterez            elles resteront
+Conditional
+     je resterais             tu resterais             elle resterait
+     nous resterions          vous resteriez           elles resteraient
+Sub. Present
+     je reste                 tu restes                elle reste
+     nous restions            vous restiez             elles restent
+Sub. Imperfect
+     je restasse              tu restasses             elle restât
+     nous restassions         vous restassiez          elles restassent
+Passer
+     en passant               on est passé
+Ind. Present
+     je passe                 tu passes                elle passe
+     nous passons             vous passez              elles passent
+Ind. Imperfect
+     je passais               tu passais               elle passait
+     nous passions            vous passiez             elles passaient
+Ind. Simple Past
+     je passai                tu passas                elle passa
+     nous passâmes            vous passâtes            elles passèrent
+Ind. Simple Future
+     je passerai              tu passeras              elle passera
+     nous passerons           vous passerez            elles passeront
+Conditional
+     je passerais             tu passerais             elle passerait
+     nous passerions          vous passeriez           elles passeraient
+Sub. Present
+     je passe                 tu passes                elle passe
+     nous passions            vous passiez             elles passent
+Sub. Imperfect
+     je passasse              tu passasses             elle passât
+     nous passassions         vous passassiez          elles passassent
+Finir
+     en finissant             on a fini
+Ind. Present
+     je finis                 tu finis                 elle finit
+     nous finissons           vous finissez            elles finissent
+Ind. Imperfect
+     je finissais             tu finissais             elle finissait
+     nous finissions          vous finissiez           elles finissaient
+Ind. Simple Past
+     je finis                 tu finis                 elle finit
+     nous finîmes             vous finîtes             elles finirent
+Ind. Simple Future
+     je finirai               tu finiras               elle finira
+     nous finirons            vous finirez             elles finiront
+Conditional
+     je finirais              tu finirais              elle finirait
+     nous finirions           vous finiriez            elles finiraient
+Sub. Present
+     je finisse               tu finisses              elle finisse
+     nous finissions          vous finissiez           elles finissent
+Sub. Imperfect
+     je finisse               tu finisses              elle finît
+     nous finissions          vous finissiez           elles finissent
+Descendre
+     en descendant            on a descendu
+Ind. Present
+     je descends              tu descends              elle descend
+     nous descendons          vous descendez           elles descendent
+Ind. Imperfect
+     je descendais            tu descendais            elle descendait
+     nous descendions         vous descendiez          elles descendaient
+Ind. Simple Past
+     je descendis             tu descendis             elle descendit
+     nous descendîmes         vous descendîtes         elles descendirent
+Ind. Simple Future
+     je descendrai            tu descendras            elle descendra
+     nous descendrons         vous descendrez          elles descendront
+Conditional
+     je descendrais           tu descendrais           elle descendrait
+     nous descendrions        vous descendriez         elles descendraient
+Sub. Present
+     je descende              tu descendes             elle descende
+     nous descendions         vous descendiez          elles descendent
+Sub. Imperfect
+     je descendisse           tu descendisses          elle descendît
+     nous descendissions      vous descendissiez       elles descendissent
+Être
+     en étant                 on a été
+Ind. Present
+     je suis                  tu es                    elle est
+     nous sommes              vous êtes                elles sont
+Ind. Imperfect
+     je étais                 tu étais                 elle était
+     nous étions              vous étiez               elles étaient
+Ind. Simple Past
+     je fus                   tu fus                   elle fut
+     nous fûmes               vous fûtes               elles furent
+Ind. Simple Future
+     je serai                 tu seras                 elle sera
+     nous serons              vous serez               elles seront
+Conditional
+     je serais                tu serais                elle serait
+     nous serions             vous seriez              elles seraient
+Sub. Present
+     je sois                  tu sois                  elle soit
+     nous soyons              vous soyez               elles soient
+Sub. Imperfect
+     je fusse                 tu fusses                elle fût
+     nous fussions            vous fussiez             elles fussent
+Avoir
+     en ayant                 on a eu
+Ind. Present
+     je ai                    tu as                    elle a
+     nous avons               vous avez                elles ont
+Ind. Imperfect
+     je avais                 tu avais                 elle avait
+     nous avions              vous aviez               elles avaient
+Ind. Simple Past
+     je eus                   tu eus                   elle eut
+     nous eûmes               vous eûtes               elles eurent
+Ind. Simple Future
+     je aurai                 tu auras                 elle aura
+     nous aurons              vous aurez               elles auront
+Conditional
+     je aurais                tu aurais                elle aurait
+     nous aurions             vous auriez              elles auraient
+Sub. Present
+     je aie                   tu aies                  elle ait
+     nous ayons               vous ayez                elles aient
+Sub. Imperfect
+     je eusse                 tu eusses                elle eût
+     nous eussions            vous eussiez             elles eussent
+Faire
+     en faisant               on a fait
+Ind. Present
+     je fais                  tu fais                  elle fait
+     nous faisons             vous faites              elles font
+Ind. Imperfect
+     je faisais               tu faisais               elle faisait
+     nous faisions            vous faisiez             elles faisaient
+Ind. Simple Past
+     je fis                   tu fis                   elle fit
+     nous fimes               vous fites               elles firent
+Ind. Simple Future
+     je ferai                 tu feras                 elle fera
+     nous ferons              vous ferez               elles feront
+Conditional
+     je ferais                tu ferais                elle ferait
+     nous ferions             vous feriez              elles feraient
+Sub. Present
+     je faise                 tu faises                elle faise
+     nous faisions            vous faisiez             elles faisent
+Sub. Imperfect
+     je faisasse              tu faisasses             elle faisât
+     nous faisassions         vous faisassiez          elles faisassent
+Voir
+     en voyant                on a vu
+Ind. Present
+     je vois                  tu vois                  elle voit
+     nous voyons              vous voyez               elles voient
+Ind. Imperfect
+     je voyais                tu voyais                elle voyait
+     nous voyions             vous voyiez              elles voyaient
+Ind. Simple Past
+     je vis                   tu vis                   elle vit
+     nous vîmes               vous vîtes               elles virent
+Ind. Simple Future
+     je verrai                tu verras                elle verra
+     nous verrons             vous verrez              elles verront
+Conditional
+     je verrais               tu verrais               elle verrait
+     nous verrions            vous verriez             elles verraient
+Sub. Present
+     je voie                  tu voies                 elle voie
+     nous voyions             vous voyiez              elles voient
+Sub. Imperfect
+     je visse                 tu visses                elle vît
+     nous vissions            vous vissiez             elles vissent
+Pouvoir
+     en pouvant               on a pu
+Ind. Present
+     je peux                  tu peux                  elle peut
+     nous pouvons             vous pouvez              elles peuvent
+Ind. Imperfect
+     je pouvais               tu pouvais               elle pouvait
+     nous pouvions            vous pouviez             elles pouvaient
+Ind. Simple Past
+     je pus                   tu pus                   elle put
+     nous pûmes               vous pûtes               elles purent
+Ind. Simple Future
+     je pourrai               tu pourras               elle pourra
+     nous pourrons            vous pourrez             elles pourront
+Conditional
+     je pourrais              tu pourrais              elle pourrait
+     nous pourrions           vous pourriez            elles pourraient
+Sub. Present
+     je puisse                tu puisses               elle puisse
+     nous puissions           vous puissiez            elles puissent
+Sub. Imperfect
+     je pusse                 tu pusses                elle pût
+     nous pussions            vous pussiez             elles pussent
+Vouloir
+     en voulant               on a voulu
+Ind. Present
+     je veux                  tu veux                  elle veut
+     nous voulons             vous voulez              elles veulent
+Ind. Imperfect
+     je voulais               tu voulais               elle voulait
+     nous voulions            vous vouliez             elles voulaient
+Ind. Simple Past
+     je voulus                tu voulus                elle voulut
+     nous voulûmes            vous voulûtes            elles voulurent
+Ind. Simple Future
+     je voudrai               tu voudras               elle voudra
+     nous voudrons            vous voudrez             elles voudront
+Conditional
+     je voudrais              tu voudrais              elle voudrait
+     nous voudrions           vous voudriez            elles voudraient
+Sub. Present
+     je veuille               tu veuilles              elle veuille
+     nous voulions            vous vouliez             elles veuillent
+Sub. Imperfect
+     je voulusse              tu voulusses             elle voulût
+     nous voulussions         vous voulussiez          elles voulussent
+Savoir
+     en sachant               on a su
+Ind. Present
+     je sais                  tu sais                  elle sait
+     nous savons              vous savez               elles savent
+Ind. Imperfect
+     je savais                tu savais                elle savait
+     nous savions             vous saviez              elles savaient
+Ind. Simple Past
+     je sus                   tu sus                   elle sut
+     nous sûmes               vous sûtes               elles surent
+Ind. Simple Future
+     je saurai                tu sauras                elle saura
+     nous saurons             vous saurez              elles sauront
+Conditional
+     je saurais               tu saurais               elle saurait
+     nous saurions            vous sauriez             elles sauraient
+Sub. Present
+     je sache                 tu saches                elle sache
+     nous sachions            vous sachiez             elles sachent
+Sub. Imperfect
+     je susse                 tu susses                elle sût
+     nous sussions            vous sussiez             elles sussent
+Aller
+     en allant                on est allé
+Ind. Present
+     je vais                  tu vas                   elle va
+     nous allons              vous allez               elles vont
+Ind. Imperfect
+     je allais                tu allais                elle allait
+     nous allions             vous alliez              elles allaient
+Ind. Simple Past
+     je allai                 tu allas                 elle alla
+     nous allâmes             vous allâtes             elles allèrent
+Ind. Simple Future
+     je irai                  tu iras                  elle ira
+     nous irons               vous irez                elles iront
+Conditional
+     je irais                 tu irais                 elle irait
+     nous irions              vous iriez               elles iraient
+Sub. Present
+     je aille                 tu ailles                elle aille
+     nous allions             vous alliez              elles aillent
+Sub. Imperfect
+     je allasse               tu allasses              elle allât
+     nous allassions          vous allassiez           elles allassent
+Sortir
+     en sortant               on est sorti
+Ind. Present
+     je sors                  tu sors                  elle sort
+     nous sortons             vous sortez              elles sortent
+Ind. Imperfect
+     je sortais               tu sortais               elle sortait
+     nous sortions            vous sortiez             elles sortaient
+Ind. Simple Past
+     je sortis                tu sortis                elle sortit
+     nous sortîmes            vous sortîtes            elles sortirent
+Ind. Simple Future
+     je sortirai              tu sortiras              elle sortira
+     nous sortirons           vous sortirez            elles sortiront
+Conditional
+     je sortirais             tu sortirais             elle sortirait
+     nous sortirions          vous sortiriez           elles sortiraient
+Sub. Present
+     je sorte                 tu sortes                elle sorte
+     nous sortions            vous sortiez             elles sortent
+Sub. Imperfect
+     je sortisse              tu sortisses             elle sortît
+     nous sortissions         vous sortissiez          elles sortissent
+Partir
+     en partant               on est parti
+Ind. Present
+     je pars                  tu pars                  elle part
+     nous partons             vous partez              elles partent
+Ind. Imperfect
+     je partais               tu partais               elle partait
+     nous partions            vous partiez             elles partaient
+Ind. Simple Past
+     je partis                tu partis                elle partit
+     nous partîmes            vous partîtes            elles partirent
+Ind. Simple Future
+     je partirai              tu partiras              elle partira
+     nous partirons           vous partirez            elles partiront
+Conditional
+     je partirais             tu partirais             elle partirait
+     nous partirions          vous partiriez           elles partiraient
+Sub. Present
+     je parte                 tu partes                elle parte
+     nous partions            vous partiez             elles partent
+Sub. Imperfect
+     je partisse              tu partisses             elle partît
+     nous partissions         vous partissiez          elles partissent
+Naître
+     en naissant              on a né
+Ind. Present
+     je nais                  tu nais                  elle naît
+     nous naissons            vous naissez             elles naissent
+Ind. Imperfect
+     je naissais              tu naissais              elle naissait
+     nous naissions           vous naissiez            elles naissaient
+Ind. Simple Past
+     je naquis                tu naquis                elle naquit
+     nous naquîmes            vous naquîtes            elles naquirent
+Ind. Simple Future
+     je naîtrai               tu naîtras               elle naîtra
+     nous naîtrons            vous naîtrez             elles naîtront
+Conditional
+     je naîtrais              tu naîtrais              elle naîtrait
+     nous naîtrions           vous naîtriez            elles naîtraient
+Sub. Present
+     je naisse                tu naisses               elle naisse
+     nous naissions           vous naissiez            elles naissent
+Sub. Imperfect
+     je naquisse              tu naquisses             elle naquît
+     nous naquissions         vous naquissiez          elles naquissent
+Mourir
+     en mourant               on est mort
+Ind. Present
+     je meurs                 tu meurs                 elle meurt
+     nous mourons             vous mourez              elles mourent
+Ind. Imperfect
+     je mourais               tu mourais               elle mourait
+     nous mourions            vous mouriez             elles mouraient
+Ind. Simple Past
+     je mourus                tu mourus                elle mourut
+     nous mourûmes            vous mourûtes            elles moururent
+Ind. Simple Future
+     je mourrai               tu mourras               elle mourra
+     nous mourrons            vous mourrez             elles mourront
+Conditional
+     je mourrais              tu mourrais              elle mourrait
+     nous mourrions           vous mourriez            elles mourraient
+Sub. Present
+     je meure                 tu meures                elle meure
+     nous mourions            vous mouriez             elles meurent
+Sub. Imperfect
+     je mourusse              tu mourusses             elle mourût
+     nous mourussions         vous mourussiez          elles mourussent
+Venir
+     en venant                on est venu
+Ind. Present
+     je viens                 tu viens                 elle vient
+     nous venons              vous venez               elles viennent
+Ind. Imperfect
+     je venais                tu venais                elle venait
+     nous venions             vous veniez              elles venaient
+Ind. Simple Past
+     je vins                  tu vins                  elle vint
+     nous vînmes              vous vîntes              elles vinrent
+Ind. Simple Future
+     je viendrai              tu viendras              elle viendra
+     nous viendrons           vous viendrez            elles viendront
+Conditional
+     je viendrais             tu viendrais             elle viendrait
+     nous viendrions          vous viendriez           elles viendraient
+Sub. Present
+     je vienne                tu viennes               elle vienne
+     nous venions             vous veniez              elles viennent
+Sub. Imperfect
+     je vinsse                tu vinsses               elle vînt
+     nous vinssions           vous vinssiez            elles vinssent
+Conduire
+     en conduisant            on a conduit
+Ind. Present
+     je conduis               tu conduis               elle conduit
+     nous conduisons          vous conduisez           elles conduisent
+Ind. Imperfect
+     je conduisais            tu conduisais            elle conduisait
+     nous conduisions         vous conduisiez          elles conduisaient
+Ind. Simple Past
+     je conduisis             tu conduisis             elle conduisit
+     nous conduisîmes         vous conduisîtes         elles conduisirent
+Ind. Simple Future
+     je conduirai             tu conduiras             elle conduira
+     nous conduirons          vous conduirez           elles conduiront
+Conditional
+     je conduirais            tu conduirais            elle conduirait
+     nous conduirions         vous conduiriez          elles conduiraient
+Sub. Present
+     je conduise              tu conduises             elle conduise
+     nous conduisions         vous conduisiez          elles conduisent
+Sub. Imperfect
+     je conduisisse           tu conduisisses          elle conduisît
+     nous conduisissions      vous conduisissiez       elles conduisissent

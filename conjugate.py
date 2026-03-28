@@ -10,19 +10,6 @@
 
 # Oracle: https://bescherelle.com/conjugueur.php
 
-# List of 'verb' forms of verbs with auxiliary être.
-# First two are venir and aller
-auxEtre = [
-    'viendr',  'ir',       # Come, go
-    'entrer',  'sortir',   # Enter, go out
-    'arriver', 'partir',   # Arrive, leave
-    'monter',  'decendre', # Climb, descend
-    'naître',  'mourr',    # Be born, die
-    'rester',  'passer',   # Stay, pass
-    'tomber',  'retourner' # Fall, return
-]
-
-
 # Prepend a string onto each element of an array
 def prepend(pre, arr):
     def concat(a):
@@ -31,25 +18,36 @@ def prepend(pre, arr):
 
 # Base class for all verbs
 class Verb:
+    # All verbs have an infinitive
+    verb = ''
+
+    # List of 'verb' forms of verbs with auxiliary être.
+    auxEtre = [
+        'venir',   'aller',    # Come, go
+        'entrer',  'sortir',   # Enter, go out
+        'arriver', 'partir',   # Arrive, leave
+        'monter',  'decendre', # Climb, descend
+        'naître',  'mourir',   # Be born, die
+        'rester',  'passer',   # Stay, pass
+        'tomber',  'retourner' # Fall, return
+    ]
+
+    def __init__(self, verb):
+        self.verb = verb # The infinitive
+
     # The auxiliary for the perfect &c
     def aux(self):
-        if self.verb in auxEtre:
+        if self.verb in self.auxEtre:
             return 'être'
         return 'avoir'
-
-    def __init__(self, stem, verb=None):
-        self.stem = stem # The stem, for most tenses
-        self.verb = verb # The longer stem, for future and conditional
-
-    def sconj(self, suff):
-        return prepend(self.stem, suff)
-
-    def vconj(self, suff):
-        return prepend(self.verb, suff)
 
 
 # The regular conjugations, based on either the stem or the verb itself
 class Regular(Verb):
+    # Regular verbs have a stem, and a longer stem for the conditional
+    stem = ''
+    cond = ''
+
     # Indicative present
     preS = ['e', 'es', 'e']
     preP = ['ons', 'ez', 'ent']
@@ -78,6 +76,17 @@ class Regular(Verb):
     parPre = ['ant']
     parPas = ['é']
 
+    def __init__(self, verb):
+        super().__init__(verb)
+        self.stem = verb[:-2] # The stem, for most tenses
+        self.cond = verb      # The longer stem, for future and conditional
+
+    def sconj(self, suff):
+        return prepend(self.stem, suff)
+
+    def cconj(self, suff):
+        return prepend(self.cond, suff)
+
     def indPresentS(self):
         return self.sconj(self.preS)
 
@@ -87,7 +96,6 @@ class Regular(Verb):
     def indPresent(self):
         return self.indPresentS() + self.indPresentP()
 
-
     def indImperfect(self):
         return self.sconj(self.impS + self.impP)
 
@@ -95,11 +103,11 @@ class Regular(Verb):
         return self.sconj(self.pasS + self.pasP)
 
     def indSimpleFuture(self):
-        return self.vconj(self.futS + self.futP)
+        return self.cconj(self.futS + self.futP)
 
     def conditional(self):
         # As indicative imperfect, but with the longer stem
-        return self.vconj(self.impS + self.impP)
+        return self.cconj(self.impS + self.impP)
 
     def subPresent(self):
         return self.sconj(self.subPreS + self.subPreP)
@@ -148,10 +156,10 @@ class RegularIR(BaseIPSI):
     parPre = ['issant']
 
     def indImperfect(self):
-        return Regular(self.stem+'iss').indImperfect()
+        return Regular(self.stem+'isser').indImperfect()
 
     def subPresent(self):
-        return Regular(self.stem+'iss').subPresent()
+        return Regular(self.stem+'isser').subPresent()
 
 
 # A regular group 3 verb class ending in -re, e.g., repondre, descendre
@@ -159,41 +167,46 @@ class RegularRE(BaseIPSI):
     preS = ['s', 's', '']
     parPas = ['u']
 
+    def __init__(self, verb):
+        self.verb = verb
+        self.stem = verb[:-2]
+        self.cond = verb[:-1]
+
 
 class Être(Regular):
     def __init__(self):
         self.stem = 'ét'
-        self.verb = 'ser'
+        self.cond = 'ser'
 
     def indPresent(self):
         return ['suis', 'es', 'est', 'sommes', 'êtes', 'sont']
 
     def indSimplePast(self):
-        return BaseUPSI('f').indSimplePast()
+        return BaseUPSI('fer').indSimplePast()
 
     def subPresent(self):
         return ['sois', 'sois', 'soit', 'soyons', 'soyez', 'soient']
 
     def subImperfect(self):
-        return BaseUPSI('f').subImperfect()
+        return BaseUPSI('fer').subImperfect()
 
 
 class Avoir(Regular):
     def __init__(self):
         self.stem = 'av'
-        self.verb = 'aur'
+        self.cond = 'aur'
 
     def indPresent(self):
         return ['ai', 'as', 'a', 'avons', 'avez', 'ont']
 
     def indSimplePast(self):
-        return BaseUPSI('e').indSimplePast()
+        return BaseUPSI('eer').indSimplePast()
 
     def subPresent(self):
         return ['aie', 'aies', 'ait', 'ayons', 'ayez', 'aient']
 
     def subImperfect(self):
-        return BaseUPSI('e').subImperfect()
+        return BaseUPSI('eer').subImperfect()
 
     def partPresent(self):
         return ['ayant']
@@ -205,7 +218,7 @@ class Avoir(Regular):
 class Faire(Regular):
     def __init__(self):
         self.stem = 'fais'
-        self.verb = 'fer'
+        self.cond = 'fer'
 
     def indPresent(self):
         return ['fais', 'fais', 'fait', 'faisons', 'faites', 'font']
@@ -220,7 +233,7 @@ class Faire(Regular):
 class Voir(Regular):
     def __init__(self):
         self.stem = 'voy'
-        self.verb = 'verr'
+        self.cond = 'verr'
 
     def indPresent(self):
         return ['vois', 'vois', 'voit', 'voyons', 'voyez', 'voient']
@@ -241,20 +254,20 @@ class Voir(Regular):
 class Pouvoir(Regular):
     def __init__(self):
         self.stem = 'pouv'
-        self.verb = 'pourr'
+        self.cond = 'pourr'
 
     def indPresent(self):
         return ['peux', 'peux', 'peut', 'pouvons', 'pouvez', 'peuvent']
 
     def indSimplePast(self):
-        return BaseUPSI('p').indSimplePast()
+        return BaseUPSI('per').indSimplePast()
 
     def subPresent(self):
         return ['puisse', 'puisses', 'puisse',
                 'puissions', 'puissiez', 'puissent']
 
     def subImperfect(self):
-        return BaseUPSI('p').subImperfect()
+        return BaseUPSI('per').subImperfect()
 
     def partPast(self):
         return ['pu']
@@ -263,7 +276,7 @@ class Pouvoir(Regular):
 class Vouloir(BaseUPSI):
     def __init__(self):
         self.stem = 'voul'
-        self.verb = 'voudr'
+        self.cond = 'voudr'
 
     def indPresent(self):
         return ['veux', 'veux', 'veut', 'voulons', 'voulez', 'veulent']
@@ -276,19 +289,19 @@ class Vouloir(BaseUPSI):
 class Savoir(Regular):
     def __init__(self):
         self.stem = 'sav'
-        self.verb = 'saur'
+        self.cond = 'saur'
 
     def indPresentS(self):
         return ['sais', 'sais', 'sait']
 
     def indSimplePast(self):
-        return BaseUPSI('s').indSimplePast()
+        return BaseUPSI('ser').indSimplePast()
 
     def subPresent(self):
-        return Regular('sach').subPresent()
+        return Regular('sacher').subPresent()
 
     def subImperfect(self):
-        return BaseUPSI('s').subImperfect()
+        return BaseUPSI('ser').subImperfect()
 
     def partPresent(self):
         return ['sachant']
@@ -299,8 +312,8 @@ class Savoir(Regular):
 
 class Aller(Regular):
     def __init__(self):
-        self.stem = 'all'
-        self.verb = 'ir'
+        super().__init__('aller')
+        self.cond = 'ir'
 
     def indPresent(self):
         return ['vais', 'vas', 'va', 'allons', 'allez', 'vont']
@@ -311,8 +324,7 @@ class Aller(Regular):
 
 class Sortir(BaseIPSI):
     def __init__(self):
-        self.stem = 'sort'
-        self.verb = 'sortir'
+        super().__init__('sortir')
 
     def indPresentS(self):
         return ['sors', 'sors', 'sort']
@@ -320,8 +332,7 @@ class Sortir(BaseIPSI):
 
 class Partir(BaseIPSI):
     def __init__(self):
-        self.stem = 'part'
-        self.verb = 'partir'
+        super().__init__('partir')
 
     def indPresentS(self):
         return ['pars', 'pars', 'part']
@@ -330,16 +341,16 @@ class Partir(BaseIPSI):
 class Naître(BaseIPSI):
     def __init__(self):
         self.stem = 'naiss'
-        self.verb = 'naîtr'
+        self.cond = 'naîtr'
 
     def indPresentS(self):
         return ['nais', 'nais', 'naît']
 
     def indSimplePast(self):
-        return BaseIPSI('naqu').indSimplePast()
+        return BaseIPSI('naquer').indSimplePast()
 
     def subImperfect(self):
-        return BaseIPSI('naqu').subImperfect()
+        return BaseIPSI('naquer').subImperfect()
 
     def partPast(self):
         return ['né']
@@ -347,8 +358,9 @@ class Naître(BaseIPSI):
 
 class Mourir(BaseUPSI):
     def __init__(self):
+        self.verb = 'mourir'
         self.stem = 'mour'
-        self.verb = 'mourr'
+        self.cond = 'mourr'
 
     def indPresentS(self):
         return ['meurs', 'meurs', 'meurt']
@@ -363,8 +375,9 @@ class Mourir(BaseUPSI):
 
 class Venir(Regular):
     def __init__(self):
+        self.verb = 'venir'
         self.stem = 'ven'
-        self.verb = 'viendr'
+        self.cond = 'viendr'
 
     def indPresent(self):
         return ['viens', 'viens', 'vient', 'venons', 'venez', 'viennent']
@@ -387,7 +400,7 @@ class Venir(Regular):
 class Conduire(BaseIPSI):
     def __init__(self):
         self.stem = 'conduis'
-        self.verb = 'conduir'
+        self.cond = 'conduir'
 
     def indPresentS(self):
         return ['conduis', 'conduis', 'conduit']
@@ -410,11 +423,11 @@ def toClass(verb):
     # Otherwise, try a (regular) solution via the suffix
     [stem, suff] = split_stem(verb)
     if suff == 'er':
-        return Regular(stem, verb)
+        return Regular(verb)
     elif suff == 'ir':
-        return RegularIR(stem, verb)
+        return RegularIR(verb)
     elif suff == 're':
-        return RegularRE(stem, stem+'r')
+        return RegularRE(verb)
     print('Unknown suffix: %s (%s)' % (verb, suff))
     exit()
 
@@ -469,6 +482,6 @@ for verb in arg.verb:
     conjSimple(verb)
 
 if arg.t:
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestSimple)
+    suite  = unittest.TestLoader().loadTestsFromTestCase(TestSimple)
     runner = unittest.TextTestRunner()
     runner.run(suite)
